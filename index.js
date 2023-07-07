@@ -7,7 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const app = express()
 
 DB = process.env.DBURL
-mongoose.connect(DB)
+mongoose.connect(DB);
 
 const connection = mongoose.connection;
 connection.once('open', () => {

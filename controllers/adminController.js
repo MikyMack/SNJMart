@@ -29,7 +29,8 @@ const verifyLogin = async (req, res) => {
 
         const userData = await User.findOne({ phoneNumber: phoneNumber })
         console.log('my user data'+userData);
-        if (userData && userData.password === password) {
+        const passwordMatch = await bcrypt.compare(password, userData.password);
+        if (userData && passwordMatch) {
 
             if (userData.isAdmin === 0) {
                 res.render("adminLogin", { message: "Phone Number and password are Incorrect" })
