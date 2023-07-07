@@ -1,0 +1,47 @@
+
+<%- include('../layouts/header') %>
+
+<div class="col-md-6">
+  <h3 class="mb-5">Coupons</h3>
+  <% let count = 1 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Discount</th>
+        <th scope="col">Minimum Value</th>
+        <th scope="col">Maximum Value</th>
+        <th scope="col">Expiry Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <% if (coupondata.length > 0) { %>
+    <tbody>
+      <% coupondata.forEach(item => { %>
+      <tr>
+        <td scope="row"><%= count++ %></td>
+        <td><%= item.name %></td>
+        <td><%= item.discount %></td>
+        <td><%= item.minimumvalue %></td>
+        <td><%= item.maximumvalue %></td>
+        <td><%= item.expiryDate %></td>
+        <td>
+          <button type="button" class="btn btn-outline-danger btn-sm" id="delete<%= count %>"
+            onclick="deleteAddress(this.id,'<%= item._id %>')" data-url="<%= item._id %>">Delete</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+    <% } else { %>
+    <tbody>
+      <tr>
+        <td colspan="7">No coupons available</td>
+      </tr>
+    </tbody>
+    <% } %>
+  </table>
+</div>
+
+
+      <%- include('../layouts/footer') %>

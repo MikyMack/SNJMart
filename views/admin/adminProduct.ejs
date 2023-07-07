@@ -1,0 +1,80 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+<style>
+    table.container {
+      border-collapse: collapse;
+      width: 100%;
+    }
+  
+    table.container th,
+    table.container td {
+      padding: 8px;
+    }
+  
+    table.container tr:not(:last-child) {
+      border-bottom: 1px solid #e9ecef; /* Set the color for the horizontal lines */
+    }
+  </style>
+  
+  <h4 class="text-center my-5 text-success">PRODUCT MANAGEMENT</h4>
+  
+  <div style="display: flex; justify-content: center;">
+    <div class="container" style="padding-top: 35px; width: 90%;">
+      <table class="container">
+        <tr>
+          <th>No:</th>
+          <th>Product Image</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Delete Product</th>
+          <th>Edit Product</th>
+        </tr>
+        <% products.forEach((product, index)=> { %>
+        <tr>
+          <td>
+            <%= index + 1 %>
+          </td>
+          <td>
+            <img src="<%= `productImages/${product.images[product.images.length-1]}` %>"
+              alt="<%= product.images[0] %>" style="max-width: 100px; max-height: 100px;">
+          </td>
+          <td>
+            <%= product.title %>
+          </td>
+          <td>
+            <%= product.category %>
+          </td>
+          <td>
+            <%= product.quantity %>
+          </td>
+          <td>
+            <%= product.price %>
+          </td>
+          <td>
+            <% if(product.is_available===0){ %>
+            <form action="/admin/products/deleteProduct/<%= product._id %>" method="POST">
+              <button class="btn btn-danger text-black" type="submit">Delete Product</button>
+            </form>
+            <% } else if(product.is_available===1){%>
+            <form action="/admin/products/recoverProduct/<%= product._id %>" method="POST">
+              <button class="btn btn-success text-white" type="submit">Recover Product</button>
+            </form>
+            <% } %>
+          </td>
+          <td>
+            <form action="/admin/products/editProduct/<%= product._id %>">
+              <button class="btn btn-success text-white" type="submit">Edit Product</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+      <br><br>
+      <button class="btn btn-outline-dark mx-3"><a style="text-decoration: none;" href="/admin/products/addProducts">+ Add Products</a></button>
+    </div>
+  </div>
+  
+  
+
+    <%- include ('../layouts/adminFooter.ejs') %>

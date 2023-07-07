@@ -1,0 +1,157 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+<h4 style="color: rgb(0, 0, 0);" class="text-center my-5">ADMIN DASHBOARD</h4>
+<div class="container-fluid pt-4 px-4">
+  <div style="margin-left: 450px;" class="row g-4">
+    <div class="col-sm-6 col-xl-3">
+      <div style="border-radius: 20px;" class="bg-success d-flex align-items-center justify-content-between p-2">
+        <i class="fa fa-dollar-sign mx-2 fa-2x" style="color: rgb(0, 0, 0);"></i>
+        <div class="ms-3">
+          <p class="mb-2 mx-3">Total Revenue</p>
+          <h6 class="ms-3 mb-2">
+            <%=totalRevenue%>
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div style="border-radius: 20px;" class="bg-info d-flex align-items-center justify-content-between p-2">
+        <i style="color: rgb(0, 0, 0);" class="mx-3 fa fa-chart-line fa-2x"></i>
+        <div class="ms-3">
+          <p class="mx-3 mb-2">Sale</p>
+          <h6 class="ms-3">
+            <%=sales%>
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sale & Revenue End -->
+
+<hr>
+<!-- space for illustration -->
+
+<input type="hidden" id="pds" value="<%=pds%>">
+<input type="hidden" id="qty" value="<%=qty%>">
+<input type="hidden" id="key1" value="<%=key1%>" />
+<input type="hidden" id="key2" value="<%=key2%>" />
+
+<div style="height: 50vh;">
+  <div style="margin-left: 5%; margin-top: 100px; width: 90%; height: 70vh; background-color: rgb(255, 255, 255);">
+    <canvas id="myChart2" class="mt-5" style="margin-left: 23%; width: 100%; max-width: 700px;"></canvas>
+  </div>
+  <div style="margin-left: 20%; margin-top: 50px; width: 60%; height: 70vh; background-color: rgb(255, 255, 255);">
+    <canvas id="myChart3" class="mt-4" style="margin-left: 19%; width:100%; max-width:700px"></canvas>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script>
+  x = document.getElementById("pds").value;
+  y = document.getElementById("qty").value;
+  xValues = x.split(",");
+  yValues = y.split(",");
+  key1 = document.getElementById('key1').value;
+  key2 = document.getElementById('key2').value;
+  xValue = key1.split(",");
+  yValue = key2.split(",");
+  console.log(xValue, yValue);
+
+  var barColors = [
+    "#CAE862",
+    "#2b5797",
+    "#e8c3b9",
+    "#1e7145",
+    "#0000FF",
+    "#FF0000",
+    "#D1FF00",
+    "#2b5797",
+    "#e8c3b9",
+    "#1e7145",
+    "#0000FF",
+    "#FFFF00"
+  ];
+
+ 
+
+
+
+  new Chart("myChart3", {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        label: "Stocks",
+        data: yValues,
+        backgroundColor: barColors
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Stocks Distribution",
+        fontColor: "black",
+        fontSize: 18
+      },
+      legend: {
+        labels: {
+          fontColor: "black"
+        }
+      },
+      backgroundColor: "white"
+    }
+  });
+  new Chart("myChart2", {
+    type: "line",
+    data: {
+      labels: xValue,
+      datasets: [{
+        label: 'Sales',
+        borderColor: '#87CEFA',
+        backgroundColor: 'white',
+        pointBackgroundColor: 'blue',
+        borderDash: [5, 5], // Set the line style as dashed
+        data: yValue
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Sales Report",
+        fontColor: "black",
+        fontSize: 18
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          gridLines: {
+            color: "black",
+            borderDash: [1, 4],
+            lineWidth: 0.3
+          },
+          ticks: {
+            fontColor: "black",
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+            color: "black",
+            borderDash: [1, 4],
+            lineWidth: 0.3
+          },
+          ticks: {
+            fontColor: "black"
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+
+  <%- include ('../layouts/adminFooter.ejs') %>

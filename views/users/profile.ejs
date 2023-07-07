@@ -1,0 +1,360 @@
+<%- include('../layouts/header') %>
+
+<div class="p-3 text-center bg-white border-bottom">
+  <div class="container">
+    <div class="row gy-3">
+      <!-- Left elements -->
+      <div class="col-lg-2 col-md-3 col-sm-6 col-12">
+        <a href="/home" style="text-decoration: none;">
+          <div class="text-center">
+            <h2 class="h2 text-dark" style="white-space: nowrap; text-decoration: none; font-weight:bolder"><b>S & J Mart</b></h2>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Left elements -->
+
+      <!-- Center elements -->
+      <div class="order-lg-last  col-lg-5 col-sm-8 col-8">
+        <div class="d-flex float-end align-items-center">
+          <a href="/loadCart" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center btn btn-outline-dark"> <i
+              class="fas fa-shopping-cart m-1 me-md-2"></i>
+            <p class="d-none d-md-block mb-0"  style="display: inline; white-space: nowrap;">My cart </p>
+          </a>
+          <a href="/loadWishlist" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center btn btn-outline-dark"> <i
+              class="fas fa-heart  m-1 me-md-2"></i>
+            <p class="d-none d-md-block mb-0">Wishlist</p>
+          </a>
+          <a href="/loadShop" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center btn btn-outline-dark"> <i
+              class="fas fa-store m-1 me-md-2" ></i>
+            <p class="d-none d-md-block mb-0">Shop</p> 
+            <a href="/userProfile" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center btn btn-outline-dark"> <i
+                class="fas fa-user m-1 me-md-2" ></i>
+              <p class="d-none d-md-block mb-0">Profile</p>
+            </a>
+            <a href="/logout" class="border rounded py-1 px-3 nav-link d-flex align-items-center btn btn-outline-dark"> <i
+                class="fas fa-sign-out-alt m-1 me-md-2"></i>
+              <p style="color: red;display: inline; white-space: nowrap;" class="d-none d-md-block mb-0">log out</p>
+            </a>
+        </div>
+      </div>
+      <!-- Center elements -->
+
+      <!-- Right elements -->
+      <div class="col-lg-5 col-md-12 col-12">
+        <div class="input-group float-center">
+          <form action="">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="search" id="search"
+                    onkeyup="update()">
+            </div>
+        </form>
+          <button type="button" class="btn btn-secondary shadow-0">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+  <br>
+  <div class="container-fluid">
+    <div class="row px-xl-5">
+      <div class="col-12">
+        <nav class="breadcrumb bg-light mb-30">
+          <a class="breadcrumb-item text-dark" href="/home">Home</a>
+
+          <span class="breadcrumb-item active">Profile</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 align-items-stretch">
+        <div class="card cart-detail">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="btn btn-outline-dark" id="v-pills-home-tab" data-toggle="pill" data-target="#v-pills-home"
+              type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</button>
+            <button class=" btn btn-outline-dark" id="v-pills-profile-tab" data-toggle="pill"
+              data-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
+              aria-selected="false">My Orders</button>
+            <button class="btn btn-outline-dark" id="v-pills-messages-tab" data-toggle="pill"
+              data-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages"
+              aria-selected="false">Addresses</button>
+            <!-- <button class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"></button> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9 ">
+        <div class="tab-content align-items-stretch" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="d-flex justify-content-between">
+             
+              <div class="card" style="width: 16rem;background-color: rgb(143, 134, 83);border-radius:5px;">
+                <div class="card-body ">
+                  <h4 class="card-title text-white"> Cart Items</h4>
+                  <p class="card-text"><%-userData.cart.item.length%></p>
+                </div>
+              </div>
+              <div class="card" style="width: 16rem;background-color: rgb(143, 134, 83);border-radius:5px;">
+                <div class="card-body ">
+                  <h4 class="card-title text-white"> Wishlist items</h4>
+                  <p class="card-text "><%-userData.wishlist.item.length%></p>
+                </div>
+              </div>
+            </div>
+
+
+
+            <%if(userData){%>
+
+              <div class="card cart-detail mt-3" style="border-radius: 15px;background-color: rgb(255, 255, 255);">
+                <form action="" style="margin-left: 60px" ; method="" id="form" onsubmit="return onSubmitFunction()">
+                  <div class="mb-2 row mt-2 pt-5">
+                    <input type="hidden" name="id" value="">
+                    <label for="staticEmail" class="col-sm-3 col-form-label">Name:</label>
+                    <div class="col-sm-6">
+                      <span style="font-weight: 600;font-size: larger;">
+                        <%=userData.name%>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 row ">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Email:</label>
+                    <div class="col-sm-6">
+                      <span style="font-weight: 500;">
+                        <%=userData.email %>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 row ">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Mobile:</label>
+                    <div class="col-sm-6">
+                      <span style="font-weight: 500;">
+                        <%=userData.phoneNumber %>
+                      </span>
+                    </div>
+                  </div>
+
+                  <p class="text-danger"></p>
+                  <div style="margin-bottom: 2%; margin-left: 43%;">
+                    <a href="/editUser" class=" mt-3 btn-lg btn btn-outline-success"> Edit</a>
+
+                  </div>
+                </form>
+
+              </div>
+              <% }%>
+
+          </div>
+          <div class="tab-pane fade bg-light" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+          style="border-radius: 15px;">
+          <section class="container">
+            <div class="table-responsive">
+              <table class="table mb-5">
+                <thead class="bg-yellow-200">
+                  <tr>
+                    <th>Order Id</th>
+                    <th>Date Purchased</th>
+                    <th>Payment</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                    <th>Orders</th>
+                  </tr>
+                </thead>
+                <% for(let key of order){ %>
+                <tbody>
+                  <td>
+                    <%=key._id%>
+                  </td>
+                  <td>
+                    <% const date = new Date(key.createdAt);
+                      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                      const formattedDate = date.toLocaleDateString('en-IN', options);
+                      const suffix = getNumberSuffix(date.getDate());
+                      const formattedDateWithSuffix = formattedDate.replace(/(\d+)(\D)$/, `$1<sup>${suffix}</sup>$2`);
+                    %>
+                    <%= formattedDateWithSuffix %>
+                  </td>
+                  <td>
+                    <%=key.payment.method%>
+                  </td>
+                  <td>
+                    <%=key.payment.amount%>
+                  </td>
+                  <td>
+                    <% if (key.status == "Delivered") { %>
+                      <% const currentDate = new Date(); const cutoffDate = new Date();
+                      cutoffDate.setDate(currentDate.getDate() - 14); const createdAtDate = new Date(key.createdAt);
+                      if (createdAtDate <= cutoffDate) { %>
+                        <button style="display: block;" type="button" class="btn btn-danger" disabled>Return Item</button>
+                      <% } else { %>
+                        <a style="display: block;" href="/returnOrder?id=<%= key._id %>" onclick="return confirm('Are you sure you want to return this order?')" class="btn btn-danger">Return Item</a>
+                      <% } %>
+                    <% } else if (key.status == "cancelled") { %>
+                      <h6>cancelled</h6>
+                    <% } else if (key.status == "returned") { %>
+                      <h6>returned</h6>
+                    <% } else { %>
+                      <a href="/cancelorder?id=<%= key._id %>" onclick="return confirm('Are you sure you want to cancel this order?')" class="btn btn-danger">Cancel</a>
+                    <% } %>
+                  </td>
+                  
+                  <td>
+                    <a href="/vieworder?id=<%=key._id%>" class="btn btn-primary">details</a>
+                  </td>
+                </tbody>
+                <% } %>
+              </table>
+            </div>
+          </section>
+        </div>
+        
+        <% function getNumberSuffix(day) {
+          if (day > 3 && day < 21) return 'th';
+          switch (day % 10) {
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+            default: return 'th';
+          }
+        } %>
+        
+
+        
+
+
+
+        <div class="tab-pane fade " id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <button type="button" style="margin-left: 2%;" class="btn btn-outline-success " data-toggle="modal"
+            data-target="#exampleModal">
+            Add Address
+          </button>
+          <!-- modal -->
+          <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header ">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Adress</h5>
+                  <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="/addAddress" class="colorlib-form">
+                    <div class="row">
+
+                      <label>Name *</label>
+                      <input type="text" class="form-control" name="firstname" placeholder="First name" required>
+
+                      <label>Last Name *</label>
+                      <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+
+
+
+                      <label>Country *</label>
+                      <input type="text" class="form-control" name="country" placeholder="Country" required>
+
+                      <label>address *</label>
+                      <input type="text" class="form-control" placeholder="Address" name="address" required>
+
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <label>Town / City *</label>
+                          <input type="text" class="form-control" name="city" placeholder="City" required>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <label>State / County *</label>
+                          <input type="text" class="form-control" name="state" placeholder="State" required>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <label>Postcode / ZIP *</label>
+                          <input type="text" class="form-control" name="zip" placeholder="Postcode/ZIP" required>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <label>Phone *</label>
+                          <input type="tel" class="form-control" name="mno" placeholder="Phone" required>
+                        </div>
+                      </div>
+
+                      <br>
+                      <!-- <button type="submit" class="btn btn-success rounded-2 shadow  ">
+                       Save Address
+                     </button> -->
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-success">Save changes</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <%if(userAddress.length>0){
+              for(let key of userAddress){%>
+              <div class="col-md-12">
+                <div class="card cart-detail border-gray  mt-2 mb-3" style="padding: 30px;border-radius: 15px;">
+                  <span class="h5">
+                    <%=key.firstname%>
+                      <%=key.lastname%>
+                  </span>
+                  <div class="pr-2">
+                    <%=key.address%>,<br>
+                      <%=key.city%>,<br>
+                        <%=key.state%><br>
+                          <%=key.country%>
+                            <br> Pin:<%=key.zip%>,<br> Phone:<%=key.mobile%>
+                                <br><br>
+                                <a href="/edit-address?id=<%=key._id%>"><input type="button" value="Edit"
+                                    class="btn btn-info btn-sm "></a>
+                                <a href="/delete-address?id=<%=key._id%>"><input type="button" value="Delete"
+                                    class="btn btn-dark btn-sm "></a>
+                  </div>
+                </div>
+
+
+              </div>
+              <%}%>
+                <%}%>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <br>
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+  <!-- Contact Javascript File -->
+  <script src="mail/jqBootstrapValidation.min.js"></script>
+  <script src="mail/contact.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="/main.js"></script>
+
+  <%- include('../layouts/footer') %>
