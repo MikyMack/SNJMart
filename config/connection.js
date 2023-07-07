@@ -1,5 +1,5 @@
+require('dotenv').config
 
-
-const dbpath ="mongodb://127.0.0.1:27017/userManagementSystem"
+const dbpath =process.env.DBURL
 
 module.exports={dbpath}
