@@ -105,6 +105,6 @@ userRoute.get("/view-details",userController.loadDetails);
 userRoute.get("/onlinePayment",userController.loadOrderSuccess);
 
 
-userRoute.use(errorHandler);
+// userRoute.use(errorHandler);
 
 module.exports = userRoute

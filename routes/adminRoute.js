@@ -94,6 +94,6 @@ adminRoute.post('/updateOrder',adminController.sortOrder)
 
 adminRoute.post("/updateStatus",adminController.updateStatus);
 
-adminRoute.use(errorHandler);
+// adminRoute.use(errorHandler);
 
 module.exports = adminRoute

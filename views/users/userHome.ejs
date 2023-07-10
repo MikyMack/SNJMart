@@ -323,8 +323,9 @@
           </div>
           <div class="container mt-4">
             <div class="row">
-              <% if (products && products.length> 0) {
-                for (let i = 0; i < 6; i++) { %>
+              <% if (products && products.length > 0) { %>
+                <% let limit = products.length>5?4:products.length %>
+                <% for (let i = 0; i < limit; i++) { %>
                   <div class="col-12 col-md-4 mb-4">
                     <a class="text-uppercase text-decoration-none" href="/view-details?id=<%= products[i]._id %>">
                       <div class="card h-100 shadow">

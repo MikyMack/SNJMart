@@ -136,6 +136,7 @@ const verifyLogin = async (req, res) => {
       if (passwordMatch) {
         if (userData.isBlocked == 0) {
           const product = await Products.find();
+          console.log(product);
           const category = await Category.find();
           const banners = await banner.findOne({ is_active: 1 });
           const userid = req.body.userDataid;
@@ -211,7 +212,7 @@ const loadHome = async (req, res) => {
       categories: category,
       banner: banners,
     });
-    // res.sendFile("")
+    res.sendFile("")
   } catch (error) {
     console.log(error.message);
   }
@@ -222,6 +223,7 @@ const loadHomeLogin = async (req, res) => {
     res.set("Cache-Control", "no-store");
     const userData = await User.findById({ _id: req.session.user_id });
     const products = await Products.find();
+    console.log(products);
     const category = await Category.find();
     const banners = await banner.findOne({ is_active: 1 });
 
