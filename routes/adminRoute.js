@@ -38,13 +38,13 @@ adminRoute.get("/banner",bannerController.loadBanner);
 
 adminRoute.get("/add-Banners",bannerController.loadAddBanner);
 
-adminRoute.post("/add-Banners",multer.uploads.array('bImage',3),bannerController.addBanner);
+adminRoute.post("/add-Banners",multer.upload.array('bImage',3),bannerController.addBanner);
 
 adminRoute.get("/hide-banner",bannerController.hideBanner)
 
 adminRoute.get("/edit-banner",bannerController.editBanner);
 
-adminRoute.post("/edit-banner",multer.uploads.array('bImage',3),bannerController.editModifyBanner);
+adminRoute.post("/edit-banner",multer.upload.array('bImage',3),bannerController.editModifyBanner);
 
 adminRoute.get("/loadCoupon",couponController.loadCoupon);
 
@@ -64,11 +64,11 @@ adminRoute.get("/products",  adminController.loadProducts)
 
 adminRoute.get("/products/addProducts",  adminController.loadAddProducts)
 
-adminRoute.post("/products/addProducts",multer.uploads.array("images"), adminController.insertProduct)
+adminRoute.post("/products/addProducts",multer.upload.array("images"), adminController.insertProduct)
 
 adminRoute.get("/products/editProduct/:product_id",  adminController.loadEditProduct)
 
-adminRoute.post("/products/editProduct/:product_id", multer.uploads.array("images"), adminController.updateProduct)
+adminRoute.post("/products/editProduct/:product_id", multer.upload.array("images"), adminController.updateProduct)
 
 adminRoute.post("/products/deleteProduct/:product_id",  adminController.deleteProduct)
 
@@ -76,9 +76,9 @@ adminRoute.post("/products/recoverProduct/:product_id", adminController.recoverP
 
 adminRoute.get("/category",  adminController.loadCategory)
 
-adminRoute.get("/addCategories",adminController.loadAddCategory)
+adminRoute.get("/category/addCategories",adminController.loadAddCategory)
 
-adminRoute.post("/addCategories",multer. uploads.single("categoryImage"), adminController.insertCategory)
+adminRoute.post("/category/addCategories",multer. upload.single("categoryImages"), adminController.insertCategory)
 
 adminRoute.get('/delete-category',adminController.deleteCategory);
 
