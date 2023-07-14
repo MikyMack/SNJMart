@@ -3,7 +3,7 @@ const Product = require("../models/productModel")
 const orders = require("../models/orderModel");
 const address = require("../models/addressModel");
 const category = require("../models/categoryModel")
-const path = require('path');
+const path = require('path')
 
 const bcrypt = require("bcrypt");
 const { findById } = require("../models/productModel");
@@ -28,7 +28,6 @@ const verifyLogin = async (req, res) => {
         const password = req.body.password
 
         const userData = await User.findOne({ phoneNumber: phoneNumber })
-        console.log('my user data'+userData);
         const passwordMatch = await bcrypt.compare(password, userData.password);
         if (userData && passwordMatch) {
 
@@ -49,7 +48,7 @@ const verifyLogin = async (req, res) => {
 
 const loadDashboard = async (req, res, next) => {
   try {
-    console.log(req.session);
+
     const products = await Product.find();
     let pds = [];
     let qty = [];
@@ -290,7 +289,7 @@ const loadCategory = async (req, res) => {
       }
       const categ = await category.find()
       const userData = await category.find({ name: { $regex: search + ".*" } })
-      res.render("categories", { category: categ });
+      res.render("categories", { category: userData });
     } catch (error) {
       console.log(error.message);
     }
