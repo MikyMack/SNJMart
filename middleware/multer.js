@@ -3,18 +3,18 @@ const path =require('path');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, "../public/productImages"))
+      cb(null, path.resolve(__dirname, "../public/upload"))
   },
   filename: (req, file, cb) => {
       const name = `${Date.now()}-${file.originalname}`
       cb(null, name)
   }
 })
-const upload = multer({ storage: storage })
+const uploads = multer({ storage: storage })
 
 const categoryStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, "../public/categoryImages"))
+      cb(null, path.resolve(__dirname, "../public/uploads"))
   },
   filename: (req, file, cb) => {
       const name = `${Date.now()}-${file.originalname}`
@@ -24,7 +24,7 @@ const categoryStorage = multer.diskStorage({
 const categoryUpload = multer({ storage: categoryStorage })
   
 module.exports={
-    upload,
+    uploads,
     storage,
     categoryUpload
 
