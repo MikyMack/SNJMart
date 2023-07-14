@@ -267,7 +267,6 @@ const deleteProduct = async (req, res) => {
 };
 
 
-
 const recoverProduct = async (req, res) => {
     try {
         const productId = req.params.product_id
@@ -296,11 +295,10 @@ const loadCategory = async (req, res) => {
   };
 
 const loadAddCategory = async (req, res) => {
-    try {
-        res.render("addCategory")
-    } catch (error) {
-        console.log(error.message)
-    }
+   
+      const userData = await User.findById({ _id: req.session.user_id });
+        res.render("addCategory",{admin: userData, message: ""})
+    
 }
 const insertCategory = async (req, res) => {
     try {
