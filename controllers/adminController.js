@@ -121,7 +121,6 @@ const loadUser = async (req, res) => {
         search = req.query.search;
       }
       const userData = await User.find({ name: { $regex: search + ".*" }, isAdmin: 0 });
-      console.log(userData);
       res.render("user", { users: userData });
     } catch (error) {
       console.log(error.message);
@@ -267,6 +266,7 @@ const deleteProduct = async (req, res) => {
 };
 
 
+
 const recoverProduct = async (req, res) => {
     try {
         const productId = req.params.product_id
@@ -288,7 +288,7 @@ const loadCategory = async (req, res) => {
       }
       const categ = await category.find()
       const userData = await category.find({ name: { $regex: search + ".*" } })
-      res.render("categories", { category: userData });
+      res.render("categories", { category: categ });
     } catch (error) {
       console.log(error.message);
     }
@@ -296,8 +296,8 @@ const loadCategory = async (req, res) => {
 
 const loadAddCategory = async (req, res) => {
     try {
-      const userData = await User.findById({ _id: req.session.user_id });
-        res.render("addCategory",{admin: userData, message: ""})
+      
+        res.render("addCategory")
     } catch (error) {
         console.log(error.message)
     }

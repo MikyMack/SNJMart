@@ -31,9 +31,9 @@ app.use("/forgot",forgotPassword)
 app.use("/admin", adminRoute)
 app.use("/",userRoute)
 
-app.all('*', (req, res) => {
-    res.render('error');
-  });
+// app.all('*', (req, res) => {
+//     res.render('error');
+//   });
 
 app.listen(7000,()=>{
     console.log("Server is running at http://localhost:7000")
