@@ -483,7 +483,7 @@ const editUserUpdate = async (req, res) => {
         $set: {
           name: req.body.name,
           email: req.body.email,
-          mobile: req.body.number,
+          phoneNumber: req.body.number,
         },
       }
     );

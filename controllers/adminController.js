@@ -295,10 +295,12 @@ const loadCategory = async (req, res) => {
   };
 
 const loadAddCategory = async (req, res) => {
-   
+    try {
       const userData = await User.findById({ _id: req.session.user_id });
         res.render("addCategory",{admin: userData, message: ""})
-    
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 const insertCategory = async (req, res) => {
     try {
@@ -315,7 +317,6 @@ const insertCategory = async (req, res) => {
                 is_available:true
             });
             await Category.save();
-            console.log(Category);
             res.render("addCategory", { message: "Category is successfully added" });
         }
     } catch (error) {

@@ -76,9 +76,9 @@ adminRoute.post("/products/recoverProduct/:product_id", adminController.recoverP
 
 adminRoute.get("/category",  adminController.loadCategory)
 
-adminRoute.get("/category/addCategories",adminController.loadAddCategory)
+adminRoute.get("/addCategories",adminController.loadAddCategory)
 
-adminRoute.post("/category/addCategories",multer. upload.single("categoryImage"), adminController.insertCategory)
+adminRoute.post("/addCategories",multer. upload.single("categoryImage"), adminController.insertCategory)
 
 adminRoute.get('/delete-category',adminController.deleteCategory);
 
