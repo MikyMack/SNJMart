@@ -9,11 +9,11 @@ const cartController=require("../controllers/cartController");
 const wishlistController=require("../controllers/wishlistController")
 const errorHandler = require('../middleware/errorHandler');
 
-userRoute.use(session({ 
-    secret: config.sessionSecret,
-    resave:false,
-    saveUninitialized:true,    
-}));
+// userRoute.use(session({ 
+//     secret: config.sessionSecret,
+//     resave:false,
+//     saveUninitialized:true,    
+// }));
 
 
 

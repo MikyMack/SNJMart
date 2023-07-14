@@ -9,11 +9,11 @@ const couponController=require("../controllers/couponController");
 const multer =require("../middleware/multer")
 const errorHandler = require('../middleware/errorHandler');
 
-adminRoute.use(session({ 
-    secret: config.sessionSecret,
-    resave:false,
-    saveUninitialized:true, 
-}));
+// adminRoute.use(session({ 
+//     secret: config.sessionSecret,
+//     resave:false,
+//     saveUninitialized:true, 
+// }));
 
 
 adminRoute.set("views", "./views/admin")
@@ -25,6 +25,8 @@ adminRoute.get("/", auth.isLogout, adminController.loadAdminLogin)
 adminRoute.post("/", adminController.verifyLogin)
 
 adminRoute.get("/adminLogout", auth.isLogin, adminController.adminLogout)
+
+adminRoute.use(auth.isLogin);
 
 adminRoute.get("/home",  adminController.loadDashboard)
 

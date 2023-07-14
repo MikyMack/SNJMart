@@ -5,6 +5,9 @@ const express = require("express");
 const nocache = require('nocache');
 const mongoSanitize = require('express-mongo-sanitize');
 const app = express()
+const session = require("express-session");
+const config = require("./config/config");
+
 
 DB = process.env.DBURL
 mongoose.connect(DB);
@@ -13,6 +16,13 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('connection is successfull');
   })
+
+
+  app.use(session({ 
+    secret: config.sessionSecret,
+    resave:false,
+    saveUninitialized:true,    
+}));
 
 
 app.set('view engine', 'ejs');
