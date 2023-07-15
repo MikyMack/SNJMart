@@ -7,7 +7,7 @@ const adminController = require("../controllers/adminController")
 const bannerController=require("../controllers/bannerController");
 const couponController=require("../controllers/couponController");
 const multer =require("../middleware/multer")
-const errorHandler = require('../middleware/errorHandler');
+// const errorHandler = require('../middleware/errorHandler');
 
 // adminRoute.use(session({ 
 //     secret: config.sessionSecret,
@@ -80,7 +80,7 @@ adminRoute.get("/category",  adminController.loadCategory)
 
 adminRoute.get("/category/addCategories",adminController.loadAddCategory)
 
-adminRoute.post("/category/addCategories",multer. upload.single("categoryImages"), adminController.insertCategory)
+adminRoute.post("/category/addCategories",multer. upload.single("categoryImage"), adminController.insertCategory)
 
 adminRoute.get('/delete-category',adminController.deleteCategory);
 
@@ -96,6 +96,6 @@ adminRoute.post('/updateOrder',adminController.sortOrder)
 
 adminRoute.post("/updateStatus",adminController.updateStatus);
 
-adminRoute.use(errorHandler);
+// adminRoute.use(errorHandler);
 
 module.exports = adminRoute

@@ -288,7 +288,7 @@ const loadCategory = async (req, res) => {
       }
       const categ = await category.find()
       const userData = await category.find({ name: { $regex: search + ".*" } })
-      res.render("categories", { category: categ });
+      res.render("categories",{ category: categ });
     } catch (error) {
       console.log(error.message);
     }
@@ -296,7 +296,6 @@ const loadCategory = async (req, res) => {
 
 const loadAddCategory = async (req, res) => {
     try {
-      
         res.render("addCategory")
     } catch (error) {
         console.log(error.message)
@@ -344,7 +343,6 @@ const deleteCategory = async (req, res) => {
     try {
       e_id = req.query.id;
       const catagoryDetail = await category.findOne({ _id: e_id })
-      console.log(catagoryDetail);
       res.render("editCategories", { category: catagoryDetail, message: "" });
     } catch (error) {
       console.log(error.message);
@@ -356,8 +354,7 @@ const deleteCategory = async (req, res) => {
     if (find) {
       const cat = await category.find();
       res.render("editCategories", { message: "already Exists!!", category: cat })
-    } else {
-  
+    } else { 
       try {
         const categotyData = await category.updateOne({ _id: e_id }, { $set: { categoryName: req.body.addCategory } });
         res.redirect("/admin/categories");
